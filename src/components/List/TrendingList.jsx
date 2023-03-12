@@ -1,24 +1,32 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import placeholder from '../../images/placeholder.webp';
+import { List, Item, MovieLink } from './List.styled';
 
 function TrendingList({ movies }) {
   return (
-    <ul>
+    <List>
       {movies.map(({ id, title, poster_path }) => {
         return (
-          <li key={id}>
-            <Link to={`/movies/${id}`} state={{ from: '/' }}>
-              <img
-                loading="lazy"
-                src={'https://image.tmdb.org/t/p/w500' + poster_path}
-                alt={title}
-              />
+          <Item key={id}>
+            <MovieLink to={`/movies/${id}`} state={{ from: '/' }}>
+              <div>
+                <img
+                  loading="lazy"
+                  src={
+                    poster_path
+                      ? 'https://image.tmdb.org/t/p/w500' + poster_path
+                      : placeholder
+                  }
+                  alt={title}
+                />
+              </div>
+
               <p>{title}</p>
-            </Link>
-          </li>
+            </MovieLink>
+          </Item>
         );
       })}
-    </ul>
+    </List>
   );
 }
 

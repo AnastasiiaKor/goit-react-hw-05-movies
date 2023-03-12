@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMoviesByKeyword } from 'services/api';
-import List from 'components/List/List';
+import MovieList from '../../components/List/MovieList';
 import { toast, ToastContainer } from 'react-toastify';
+import { Container } from '../../components/SharedLayout/SharedLayout.styled';
+import { Form, Button } from './Movies.styled';
 
 function Movies() {
   const [results, setResults] = useState([]);
@@ -34,12 +36,14 @@ function Movies() {
   }, [query]);
   return (
     <main>
-      <form onSubmit={formSubmitHandler}>
-        <input autoComplete="off" name="query" type="text" autoFocus />
-        <button type="submit">Search</button>
-      </form>
-      <List movies={results} />
-      <ToastContainer />
+      <Container>
+        <Form onSubmit={formSubmitHandler}>
+          <input autoComplete="off" name="query" type="text" autoFocus />
+          <Button type="submit">Search</Button>
+        </Form>
+        <MovieList movies={results} />
+        <ToastContainer />
+      </Container>
     </main>
   );
 }

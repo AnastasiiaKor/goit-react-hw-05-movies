@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Container, Header, List, Link } from './SharedLayout.styled';
+import { RotatingLines } from 'react-loader-spinner';
 
 function SharedLayout() {
   return (
@@ -19,7 +20,17 @@ function SharedLayout() {
           </nav>
         </Container>
       </Header>
-      <Suspense fallback={<div>Loading ...</div>}>
+      <Suspense
+        fallback={
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          />
+        }
+      >
         <Outlet />
       </Suspense>
     </div>
